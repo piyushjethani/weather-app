@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Weather App</title>
+  <style>
+    :root {
+      --bg-light: rgba(255, 255, 255, 0.1);
+      --bg-dark: rgba(0, 0, 0, 0.4);
+      --text-light: #f0f0f0;
+      --text-dark: #1a1a1a;
+      --accent-light: #72c2f1;
+      --accent-dark: #50a4da;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url('https://images.unsplash.com/photo-1501630834273-4b5604d2ee31?auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      transition: background-color 0.3s ease;
+    }
+
+    .weather-container {
+      background: var(--bg-dark);
+      color: var(--text-light);
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(10px);
+      padding: 30px 25px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      margin-top: 60px;
+      transition: all 0.3s ease;
+    }
+
+    body.dark .weather-container {
+      background: var(--bg-dark);
+      color: var(--text-light);
+    }
+
+    h1 {
+      font-size: 26px;
+      margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #a2d2ff;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      font-size: 16px;
+      outline: none;
+    }
+
+    input::placeholder {
+      color: #d0dce6;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: var(--accent-light);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    
+
+    button:hover {
+      background: var(--accent-dark);
+    }
+
+    .temp {
+      font-size: 48px;
+      margin: 20px 0 10px;
+      font-weight: bold;
+    }
+
+    .hot {
+      color: #ffe267;
+    }
+
+    .cold {
+      color: #87f0ff;
+    }
+
+    .error {
+      color: #ff8c8c;
+      margin-top: 10px;
+    }
+
+    .icon img {
+      width: 64px;
+    }
+
+    .forecast {
+      margin-top: 20px;
+    }
+
+    .forecast-day {
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .forecast-day img {
+      width: 40px;
+      height: 40px;
+    }
+
+    .toggle-container {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+    }
+
+    .toggle-btn {
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background 0.3s ease;
+    }
+    .favorites {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.favorites button {
+  flex: 1;
+  padding: 8px;
+  background-color: #0d88ed;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s ease;
+}
+
+.favorites button:hover {
+  background-color: #2d9cdb;
+}
+
+
+    .toggle-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    @media (max-width: 500px) {
+      .temp {
+        font-size: 36px;
+      }
+      .forecast-day {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="toggle-container">
+    <button class="toggle-btn" onclick="toggleMode()">Toggle Mode</button>
+  </div>
+  <div class="favorites">
+    <button onclick="fetchWeather('Delhi')">Delhi</button>
+    <button onclick="fetchWeather('Mumbai')">Mumbai</button>
+    <button onclick="fetchWeather('New York')">New York</button>
+    <button onclick="fetchWeather('Dubai')">Dubai</button>
+  </div>
+  
+
+  <div class="weather-container">
+    <h1>Weather App</h1>
+    <input type="text" id="cityInput" placeholder="Enter city name..." />
+    <button  style="border-color: #09a1ffc7;" id="getWeatherBtn">Get Weather</button>
+    <div id="result"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
